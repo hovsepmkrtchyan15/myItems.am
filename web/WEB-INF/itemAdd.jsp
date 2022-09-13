@@ -1,4 +1,6 @@
-<%--
+<%@ page import="manager.CategoryManager" %>
+<%@ page import="model.Category" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Hoso
   Date: 12.09.2022
@@ -11,14 +13,19 @@
     <title>Add Item Page</title>
 </head>
 <body>
+
+<%CategoryManager categoryManager = new CategoryManager();%>
+<%List<Category> categoryList = categoryManager.getAll();%>
 <form action="/item/add" method="post" enctype="multipart/form-data">
   <input type="text" name="title" placeholder="title"><br><br>
   <input type="number" name="price" placeholder="price"><br><br>
   <select name="categoryName">
-    <option value="1">Cars</option>
-    <option value="2">House</option>
-    <option value="3">Commercial</option>
-    <option value="4">Furniture</option>
+
+    <%for (Category category : categoryList) {%>
+
+    <option value=<%=category.getId()%>>><%=category.getCategoryName()%></option>
+
+    <%}%>
   </select><br><br>
   <input type="file" name="pic"><br><br>
   <input type="submit" value="ADD">

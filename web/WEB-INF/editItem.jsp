@@ -12,7 +12,7 @@
     <title>Edit Item Page</title>
 </head>
 <body>
-<%ItemManager itemManager = new ItemManager();%>
+
 
 <%Item item = (Item)request.getAttribute("item");%>
 

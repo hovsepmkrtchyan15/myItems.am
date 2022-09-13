@@ -1,6 +1,8 @@
 <%@ page import="model.User" %>
 <%@ page import="model.Item" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="manager.CategoryManager" %>
+<%@ page import="model.Category" %><%--
   Created by IntelliJ IDEA.
   User: Hoso
   Date: 12.09.2022
@@ -17,6 +19,8 @@
 
 
 <body>
+
+<%CategoryManager categoryManager = new CategoryManager();%>
 <div style="margin: 0 auto; width: 1400px">
 
     <div style="text-align: right">
@@ -25,15 +29,18 @@
     </div>
     <div style="text-align: center; margin-top: 30px">
 
+<%List<Category> categoryList = categoryManager.getAll();%>
 
         <a href="/items?categoryId=0">HOME |</a>
-        <a href="/items?categoryId=1">CARS |</a>
-        <a href="/items?categoryId=2">HOUSES |</a>
-        <a href="/items?categoryId=3">COMMERCIAL |</a>
-        <a href="/items?categoryId=4">FURNITURE</a>
 
-        <%if(itemList != null){%>
-        <%for (Item item : itemList) {
+        <%for (Category category : categoryList) {%>
+
+        <a href="/items?categoryId=<%=category.getId()%>"><%=category.getCategoryName()%> |</a>
+
+<%}%>
+        <%if (itemList != null) {%>
+        <%
+            for (Item item : itemList) {
                 if (item.getPicUrl() == null || item.getPicUrl().length() == 0) {
         %>
 
